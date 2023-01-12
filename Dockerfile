@@ -10,6 +10,10 @@ COPY requirements.txt .
 # Install the required packages
 RUN pip install --no-cache-dir -r requirements.txt
 
+#set Env variable to application name i.e xff.py
+ENV FLASK_APP xff.py
+
+
 # Copy the application code to the container
 COPY . .
 
