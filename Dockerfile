@@ -10,9 +10,8 @@ COPY requirements.txt .
 # Install the required packages
 RUN pip install --no-cache-dir -r requirements.txt
 
-#set Env variable to application name i.e xff.py
-ENV FLASK_APP xff.py
-
+# Install gunicorn server recommended for production.Flask server is recommended for dev environment
+RUN pip install gunicorn
 
 # Copy the application code to the container
 COPY . .
@@ -21,4 +20,4 @@ COPY . .
 EXPOSE 5000
 
 # Run the application
-CMD ["flask", "run", "--host=0.0.0.0"]
+CMD ["gunicorn", "-b", "0.0.0.0:5000", "app:xff.py"]
